@@ -7,7 +7,6 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,20 +29,20 @@ public class ToshoExamDAO {
 	}
 	
 	public static int registerEmploymentExam(ToshoExam exam) {
-		String sql = "INSERT INTO library VALUES(default, ?, ?, ?, ?, ?, ?, current_timestamp)";
+		String sql = "INSERT INTO book VALUES(default, ?, ?, ?, ?, ?, ?)";
 		int result = 0;
 				
 		try (
 				Connection con = getConnection();
 				PreparedStatement pstmt = con.prepareStatement(sql);
 				){
-			pstmt.setString(1, exam.getBook_name());
-			pstmt.setObject(2, LocalDate.parse(exam.getExamDate()));
-			pstmt.setString(3, exam.getName());
-			pstmt.setString(4, exam.getCompany());
-			pstmt.setInt(5, exam.getAccountId());
-			pstmt.setInt(6, exam.getIsbn());
-
+			pstmt.setString(1, exam.getName());
+			pstmt.setString(2, exam.getPublisher());
+			pstmt.setInt(3, exam.getIsbn());
+			pstmt.setString(4, exam.getAuthor());
+			pstmt.setString(5, exam.getNew_old());
+			pstmt.setString(6, exam.getHouse());
+			
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -55,10 +54,10 @@ public class ToshoExamDAO {
 		return result;
 	}
 	// ログインしているユーザの全受験状況を取得
-	public static List<ToshoExam> selectAlllibrary(int account_id){
+	public static List<ToshoExam> selectAlllibrary(){
 		
 		// 実行するSQL
-		String sql = "SELECT * FROM library where account_id = ?";
+		String sql = "SELECT * FROM book";
 		
 		// 返却用のListインスタンス
 		List<ToshoExam> result = new ArrayList<>();
@@ -68,21 +67,26 @@ public class ToshoExamDAO {
 				PreparedStatement pstmt = con.prepareStatement(sql);
 				){
 			
-			pstmt.setInt(1, account_id);
+			
 			
 			try (ResultSet rs = pstmt.executeQuery()){
 				
 				while(rs.next()) {
 					int id = rs.getInt("id");
-					String book_name = rs.getString("book_name");
-					String exam_date = rs.getString("exam_date");
 					String name = rs.getString("name");
-					String company = rs.getString("company");
-					//int account_id = rs.getInt("account_id");
+					String publisher = rs.getString("publisher");
 					int isbn = rs.getInt("isbn");
-					String createdAt = rs.getString("created_at");
+					String author = rs.getString("author");
+					String new_old = rs.getString("new_old");
+					String house = rs.getString("house");
+					
+				
+					
+					//int account_id = rs.getInt("account_id");
+					
+				
 
-					ToshoExam exam = new ToshoExam(id, book_name, exam_date, name, company, account_id, isbn, createdAt);
+					ToshoExam exam = new ToshoExam(id, name, publisher, isbn, author, new_old, house);
 					result.add(exam);
 				}
 			}
