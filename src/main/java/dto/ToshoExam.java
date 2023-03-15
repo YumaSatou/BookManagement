@@ -2,26 +2,28 @@ package dto;
 
 public class ToshoExam {
 	private int id;
-	private String book_name;
-	private String examDate;
 	private String name;
-	private String company;
-	private int accountId;
+	private String publisher;
 	private int isbn;
-	private String createdAt;
+	private String author;
+	private String new_old;
+	private String house;
 	
-	public ToshoExam(int id, String book_name, String examDate, String name, String company, int accountId,int isbn, String createdAt) {
+	
+	
+	public ToshoExam(int id, String name, String publisher, int isbn, String author, String new_old, String house) {
 		super();
 		this.id = id;
-		this.book_name = book_name;
-		this.examDate = examDate;
 		this.name = name;
-		this.company = company;
-		this.accountId = accountId;
+		this.publisher = publisher;
 		this.isbn = isbn;
-		this.createdAt = createdAt;
+		this.author = author;
+		this.new_old = new_old;
+		this.house = house;
+		
+		
+		
 	}
-
 
 	public int getId() {
 		return id;
@@ -29,22 +31,6 @@ public class ToshoExam {
 
 	public void setId(int id) {
 		this.id = id;
-	}
-
-	public String getBook_name() {
-		return book_name;
-	}
-
-	public void setBook_name(String book_name) {
-		this.book_name = book_name;
-	}
-
-	public String getExamDate() {
-		return examDate;
-	}
-
-	public void setExamDate(String examDate) {
-		this.examDate = examDate;
 	}
 
 	public String getName() {
@@ -55,21 +41,12 @@ public class ToshoExam {
 		this.name = name;
 	}
 
-	public String getCompany() {
-		return company;
+	public String getPublisher() {
+		return publisher;
 	}
 
-	public void setCompany(String company) {
-		this.company = company;
-	}
-
-
-	public int getAccountId() {
-		return accountId;
-	}
-
-	public void setAccountId(int accountId) {
-		this.accountId = accountId;
+	public void setPublisher(String publisher) {
+		this.publisher = publisher;
 	}
 
 	public int getIsbn() {
@@ -80,11 +57,29 @@ public class ToshoExam {
 		this.isbn = isbn;
 	}
 
-	public String getCreatedAt() {
-		return createdAt;
+	public String getAuthor() {
+		return author;
 	}
 
-	public void setCreatedAt(String createdAt) {
-		this.createdAt = createdAt;
+	public void setAuthor(String author) {
+		this.author = author;
 	}
+
+	public String getNew_old() {
+		return new_old;
+	}
+
+	public void setNew_old(String new_old) {
+		this.new_old = new_old;
+	}
+
+	public String getHouse() {
+		return house;
+	}
+
+	public void setHouse(String house) {
+		this.house = house;
+	}
+
+	
 }

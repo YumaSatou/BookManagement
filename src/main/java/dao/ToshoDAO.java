@@ -32,22 +32,22 @@ public class ToshoDAO {
 	    return DriverManager.getConnection(dbUrl, username, password);
 	}
 	
-	public static int registerAccount(Tosho book_account) {
-		String sql = "INSERT INTO book_account VALUES(default, ?, ?, ?, ?, current_timestamp)";
+	public static int registerAccount(Tosho admin_account) {
+		String sql = "INSERT INTO admin_management VALUES(default, ?, ?, ?, ?)";
 		int result = 0;
 		
 		// ランダムなソルトの取得(今回は32桁で実装)
 		String salt = GenerateSalt.getSalt(32);
 		
 		// 取得したソルトを使って平文PWをハッシュ
-		String hashedPw = GenerateHashedPw.getSafetyPassword(book_account.getPassword(), salt);
+		String hashedPw = GenerateHashedPw.getSafetyPassword(admin_account.getPassword(), salt);
 		
 		try (
 				Connection con = getConnection();
 				PreparedStatement pstmt = con.prepareStatement(sql);
 				){
-			pstmt.setString(1, book_account.getName());
-			pstmt.setString(2, book_account.getMail());
+			pstmt.setString(1, admin_account.getName());
+			pstmt.setString(2, admin_account.getMail());
 			pstmt.setString(3, salt);
 			pstmt.setString(4, hashedPw);
 
@@ -121,7 +121,7 @@ public class ToshoDAO {
 		// 返却用変数
 		List<ToshoExam> result = new ArrayList<>();
 
-		String sql = "SELECT * FROM library";
+		String sql = "SELECT * FROM book";
 		
 		try (
 				Connection con = getConnection();
@@ -131,16 +131,17 @@ public class ToshoDAO {
 				while(rs.next()) {
 					
 					int id = rs.getInt("id");
-					String book_name = rs.getString("book_name");
-					String exam_date = rs.getString("exam_date");
 					String name = rs.getString("name");
-					String company = rs.getString("company");
-					int account_id = rs.getInt("account_id");
+					String publisher = rs.getString("publisher");
 					int isbn = rs.getInt("isbn");
+					String author = rs.getString("author");
+					String new_old = rs.getString("new_old");
+					String house = rs.getString("house");
+					//int account_id = rs.getInt("account_id");
 					//String salt = rs.getString("salt");
 					//String password = rs.getString("password");
 					
-					ToshoExam Ac = new ToshoExam(id, book_name, exam_date, name, company, account_id, isbn, null);
+					ToshoExam Ac = new ToshoExam(id, name, publisher, isbn, author, new_old, house);
 					
 					result.add(Ac);
 				}
@@ -155,32 +156,33 @@ public class ToshoDAO {
 		return result;
 	}
 	
-	public static List<ToshoExam> selectAllBook(String book_name) {
+	public static List<ToshoExam> selectAllBook(String name) {
 		
 		// 返却用変数
 		List<ToshoExam> result = new ArrayList<>();
 
-		String sql = "SELECT * FROM library WHERE book_name like ?";
+		String sql = "SELECT * FROM book WHERE name like ?";
 		
 		try (
 				Connection con = getConnection();
 				PreparedStatement pstmt = con.prepareStatement(sql);
 				){
-			pstmt.setString(1, "%"+book_name+"%");
+			pstmt.setString(1, "%"+name+"%");
 			try (ResultSet rs = pstmt.executeQuery()){
 				
 				while(rs.next()) {
 					int id = rs.getInt("id");
-					String book = rs.getString("book_name");
-					String exam_date = rs.getString("exam_date");
-					String name = rs.getString("name");
-					String company = rs.getString("company");
-					int account_id = rs.getInt("account_id");
+					String book_name = rs.getString("name");
+					String publisher = rs.getString("publisher");
 					int isbn = rs.getInt("isbn");
+					String author = rs.getString("author");
+					String new_old = rs.getString("new_old");
+					String house = rs.getString("house");
+					//int account_id = rs.getInt("account_id");
 					//String salt = rs.getString("salt");
 					//String password = rs.getString("password");
 					
-					ToshoExam Ac = new ToshoExam(id, book, exam_date, name, company, account_id, isbn, null);
+					ToshoExam Ac = new ToshoExam(id, book_name, publisher, isbn, author, new_old, house);
 					
 					result.add(Ac);
 				}
