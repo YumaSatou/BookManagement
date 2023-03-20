@@ -64,7 +64,7 @@ public class ToshoDAO {
 	
 	// メールアドレスを元にソルトを取得
 	public static String getSalt(String mail) {
-		String sql = "SELECT salt FROM book_account WHERE mail = ?";
+		String sql = "SELECT salt FROM admin_management WHERE mail = ?";
 		
 		try (
 				Connection con = getConnection();
@@ -89,7 +89,7 @@ public class ToshoDAO {
 	
 	// ログイン処理
 	public static Tosho login(String mail, String hashedPw) {
-		String sql = "SELECT * FROM book_account WHERE mail = ? AND password = ?";
+		String sql = "SELECT * FROM admin_management WHERE mail = ? AND password = ?";
 		
 		try (
 				Connection con = getConnection();
@@ -104,7 +104,7 @@ public class ToshoDAO {
 					int id = rs.getInt("id");
 					String name = rs.getString("name");
 					String salt = rs.getString("salt");
-					String createdAt = rs.getString("created_at");
+					
 					
 					return new Tosho(id, name, mail, salt, null, null);
 				}

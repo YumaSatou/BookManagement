@@ -19,7 +19,7 @@
 	<a href="LogoutServlet">ログアウト</a><br>
 	<h2>図書管理</h2>
 	<a href="RegisterLibraryServlet">図書登録</a><br>
-	<a href="ListBookServlet">図書検索</a><br>
+	<a href="SearchServlet">図書検索</a><br>
 	<a href="UpdateLibraryServlet">新→旧更新</a><br>
 	<a href="">貸出中図書一覧</a><br>
 	<a href="">図書貸出履歴</a><br>
