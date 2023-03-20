@@ -38,7 +38,7 @@ public class ToshoExamDAO {
 				){
 			pstmt.setString(1, exam.getName());
 			pstmt.setString(2, exam.getPublisher());
-			pstmt.setInt(3, exam.getIsbn());
+			pstmt.setString(3, exam.getIsbn());
 			pstmt.setString(4, exam.getAuthor());
 			pstmt.setString(5, exam.getNew_old());
 			pstmt.setString(6, exam.getHouse());
@@ -75,7 +75,7 @@ public class ToshoExamDAO {
 					int id = rs.getInt("id");
 					String name = rs.getString("name");
 					String publisher = rs.getString("publisher");
-					int isbn = rs.getInt("isbn");
+					String isbn = rs.getString("isbn");
 					String author = rs.getString("author");
 					String new_old = rs.getString("new_old");
 					String house = rs.getString("house");
@@ -123,7 +123,7 @@ public static int deletelibrary(String book_name) {
 		return result;
 	}
 
-	public static int updatelibrary(int before_ISBN, int isbn, String book_name,String name,String company) {
+	public static int updatelibrary(String before_ISBN, String isbn, String book_name,String name,String company) {
 		String sql = "UPDATE library set isbn = ?,book_name = ?,name = ?,company = ? WHERE isbn = ?";
 		int result = 0;
 		
@@ -131,11 +131,11 @@ public static int deletelibrary(String book_name) {
 				Connection con = getConnection();
 				PreparedStatement pstmt = con.prepareStatement(sql);		// 構文解析
 				){
-			pstmt.setInt(1,isbn);
+			pstmt.setString(1,isbn);
 			pstmt.setString(2, book_name);
 			pstmt.setString(3, name);
 			pstmt.setString(4, company);
-			pstmt.setInt(5, before_ISBN);
+			pstmt.setString(5, before_ISBN);
 
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
@@ -166,7 +166,7 @@ public static int deletelibrary(String book_name) {
 					int id = rs.getInt("id");
 					String book_name = rs.getString("name");
 					String publisher = rs.getString("publisher");
-					int isbn = rs.getInt("isbn");
+					String isbn = rs.getString("isbn");
 					String author = rs.getString("author");
 					String new_old = rs.getString("new_old");
 					String house = rs.getString("house");

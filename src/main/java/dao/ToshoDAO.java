@@ -133,7 +133,7 @@ public class ToshoDAO {
 					int id = rs.getInt("id");
 					String name = rs.getString("name");
 					String publisher = rs.getString("publisher");
-					int isbn = rs.getInt("isbn");
+					String isbn = rs.getString("isbn");
 					String author = rs.getString("author");
 					String new_old = rs.getString("new_old");
 					String house = rs.getString("house");
@@ -174,7 +174,7 @@ public class ToshoDAO {
 					int id = rs.getInt("id");
 					String book_name = rs.getString("name");
 					String publisher = rs.getString("publisher");
-					int isbn = rs.getInt("isbn");
+					String isbn = rs.getString("isbn");
 					String author = rs.getString("author");
 					String new_old = rs.getString("new_old");
 					String house = rs.getString("house");
@@ -196,4 +196,38 @@ public class ToshoDAO {
 		// Listを返却する。0件の場合は空のListが返却される。
 		return result;
    }
+	
+	public static int updateBook(String new_old, String isbn) {
+
+		// 発行するSQL
+		// ? はプレースホルダといいます。
+		// 後の処理で ? に値を埋め込みます。(SQLインジェクション対策)
+		String sql = "UPDATE book SET new_old=? WHERE isbn=?";
+		
+		// 更新件数を格納する変数
+		int result = 0;
+
+		try (
+				Connection con = getConnection();	// DB接続
+				PreparedStatement pstmt = con.prepareStatement(sql);			// 構文解析
+				){
+			
+			// プレースホルダに値を設定(型によってメソッドが違います。)
+			// 第1引数：何番目の ? に設定するか(1から数える)
+			// 第2引数：設定する値
+			
+			pstmt.setString(1,new_old);
+			pstmt.setString(2,isbn);
+			
+			// SQLの実行(戻り値は更新件数)
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (URISyntaxException e) {
+			e.printStackTrace();
+		} finally {
+			System.out.println(result + "件更新しました。");
+		}
+		return result;
+	}
 }
