@@ -80,8 +80,6 @@ public class ToshoExamDAO {
 					String new_old = rs.getString("new_old");
 					String house = rs.getString("house");
 					
-				
-					
 					//int account_id = rs.getInt("account_id");
 					
 				
@@ -150,4 +148,44 @@ public static int deletelibrary(String book_name) {
 		return result;
 	}
 	
+		public static List<ToshoExam> selectAllBook(String name) {
+		
+		// 返却用変数
+		List<ToshoExam> result = new ArrayList<>();
+
+		String sql = "SELECT * FROM book WHERE name like ?";
+		
+		try (
+				Connection con = getConnection();
+				PreparedStatement pstmt = con.prepareStatement(sql);
+				){
+			pstmt.setString(1, "%"+name+"%");
+			try (ResultSet rs = pstmt.executeQuery()){
+				
+				while(rs.next()) {
+					int id = rs.getInt("id");
+					String book_name = rs.getString("name");
+					String publisher = rs.getString("publisher");
+					int isbn = rs.getInt("isbn");
+					String author = rs.getString("author");
+					String new_old = rs.getString("new_old");
+					String house = rs.getString("house");
+					//int account_id = rs.getInt("account_id");
+					//String salt = rs.getString("salt");
+					//String password = rs.getString("password");
+					
+					ToshoExam Ac = new ToshoExam(id, book_name, publisher, isbn, author, new_old, house);
+					
+					result.add(Ac);
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (URISyntaxException e) {
+			e.printStackTrace();
+		}
+
+		// Listを返却する。0件の場合は空のListが返却される。
+		return result;
+   }
 }
