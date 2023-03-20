@@ -50,7 +50,7 @@ public class RegisterLibraryExecuteServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		String name = request.getParameter("name");
 		String publisher = request.getParameter("publisher");
-		int isbn = Integer.parseInt(request.getParameter("isbn"));
+		String isbn = request.getParameter("isbn");
 		String author = request.getParameter("author");
 		String new_old = request.getParameter("new_old");
 		String house = request.getParameter("house");
