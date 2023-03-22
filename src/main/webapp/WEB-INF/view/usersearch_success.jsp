@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ page import="java.util.List" %>
+<%@ page import="java.util.ArrayList" %>
+    <%@ page import="dto.UserList" %>
     <%@ page import="dto.Tosho" %>
 <!DOCTYPE html>
 <html>
@@ -25,11 +28,35 @@
 	<a href="">図書貸出履歴</a><br>
 	<a href="">口コミ一覧</a><br>
 	
-	<form action="SearchUserServlet" method="post">
-	<p>貸出はこちら</p>
-	ユーザー名　　<input type="text" name="surname"><br>
-	<input type="submit" value="検索"><br>
-	</form>
+	<h2>検索結果</h2>
+	<table border="1">
+		<tr>
+			<th>UserID</th>
+			<th>メール</th>
+			<th>姓</th>
+			<th>名</th>
+			<th>住所</th>
+			<th></th>
+			
+		</tr>
+	
+		<%
+		List<UserList> list = (List<UserList>)request.getAttribute("userlist");
+		for(UserList uu : list){
+		%>
+		
+		<tr>
+			<td><%=uu.getUser_id() %></td>
+			<td ><%=uu.getMail() %></td>
+			<td ><%=uu.getSurname()%></td>
+			<td><%=uu.getName() %></td>
+			<td ><%=uu.getAddress()%></td>
+			<td>削除</td>
+		</tr>
+		<%
+		}
+		%>
+		</table>
 	
 </body>
 </html>
