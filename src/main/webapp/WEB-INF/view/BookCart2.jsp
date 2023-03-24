@@ -47,6 +47,10 @@ BookCart bookcart = (BookCart)session.getAttribute("bookcart");
 		<td><%=v.getIsbn() %></td>
 	</tr>
 	<%} %>
+	
+	<form action="CartBookRegisterServlet" method="post">
+	<input type="submit" value="貸出"><br>
+	</form>
 </table>
 </body>
 </html>
