@@ -46,12 +46,19 @@
 		%>
 		
 		<tr>
+			<form action="BookCartServlet" method="post">
 			<td><%=uu.getUser_id() %></td>
 			<td ><%=uu.getMail() %></td>
 			<td ><%=uu.getSurname()%></td>
 			<td><%=uu.getName() %></td>
 			<td ><%=uu.getAddress()%></td>
-			<td>削除</td>
+			<td><input type="hidden" name="user_id" value="<%=uu.getUser_id() %>">
+			<input type="hidden" name="mail" value="<%=uu.getMail() %>">
+			<input type="hidden" name="surname" value="<%=uu.getSurname() %>">
+			<input type="hidden" name="name" value="<%=uu.getName() %>">
+			<input type="hidden" name="address" value="<%=uu.getAddress() %>">
+			<input type="submit" value="貸出処理へ"></td>
+			</form>
 		</tr>
 		<%
 		}
