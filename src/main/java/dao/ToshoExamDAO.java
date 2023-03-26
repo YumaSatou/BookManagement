@@ -7,7 +7,10 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import dto.ToshoExam;
@@ -188,4 +191,49 @@ public static int deletelibrary(String book_name) {
 		// Listを返却する。0件の場合は空のListが返却される。
 		return result;
    }
+		
+		public static int RegisterBookCart(int user_id, int book_id, String new_old) {
+			String sql = "INSERT INTO book_lending VALUES(default, ?, ?, current_timestamp, ?, null)";
+			int result = 0;
+					
+			try (
+					Connection con = getConnection();
+					PreparedStatement pstmt = con.prepareStatement(sql);
+					){
+				Date date = new Date();
+				Calendar cal = Calendar.getInstance();
+				String old = "旧";
+				
+				if (new_old.equals(old)) {
+					cal.setTime(date);
+				    cal.add(Calendar.DATE, 14);
+				    SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy/MM/dd");
+				    String str1 = sdf1.format(cal.getTime());
+				    
+				    pstmt.setInt(1, user_id);
+					pstmt.setInt(2, book_id);
+					pstmt.setString(3, str1);
+					
+					result = pstmt.executeUpdate();
+				} else {
+					cal.setTime(date);
+				    cal.add(Calendar.DATE, 7);
+				    SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy/MM/dd");
+				    String str1 = sdf1.format(cal.getTime());
+				    
+				    pstmt.setInt(1, user_id);
+					pstmt.setInt(2, book_id);
+					pstmt.setString(3, str1);
+					
+					result = pstmt.executeUpdate();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} catch (URISyntaxException e) {
+				e.printStackTrace();
+			} finally {
+				System.out.println(result + "件更新しました。");
+			}
+			return result;
+		}
 }

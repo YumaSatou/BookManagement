@@ -7,13 +7,15 @@ public class Cart implements Serializable {
 	int book_id;
 	String name;
 	String isbn;
+	String new_old;
 	
-	public Cart(int user_id, int book_id, String name, String isbn) {
+	public Cart(int user_id, int book_id, String name, String isbn, String new_old) {
 		super();
 		this.user_id = user_id;
 		this.book_id = book_id;
 		this.name = name;
 		this.isbn = isbn;
+		this.new_old = new_old;
 	}
 
 	public int getUser_id() {
@@ -47,6 +49,15 @@ public class Cart implements Serializable {
 	public void setIsbn(String isbn) {
 		this.isbn = isbn;
 	}
+
+	public String getNew_old() {
+		return new_old;
+	}
+
+	public void setNew_old(String new_old) {
+		this.new_old = new_old;
+	}
+	
 	
 	
 }

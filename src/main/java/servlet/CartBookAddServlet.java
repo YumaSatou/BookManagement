@@ -48,6 +48,7 @@ public class CartBookAddServlet extends HttpServlet {
 				String book_id = request.getParameter("id");
 				String name = request.getParameter("name");
 				String isbn = request.getParameter("isbn");
+				String new_old = request.getParameter("new_old");
 				String user_id = request.getParameter("user_id");
 		    	
 		    	int book_id2 = Integer.parseInt(book_id);
@@ -62,7 +63,7 @@ public class CartBookAddServlet extends HttpServlet {
 				if(bookcart == null) {
 					bookcart = new BookCart();
 				} 
-				Cart cart = new Cart(user_id2, book_id2,name, isbn);
+				Cart cart = new Cart(user_id2, book_id2,name, isbn, new_old);
 				CartLogic logic= new CartLogic();
 				logic.execute(bookcart, cart);
 				session.setAttribute("bookcart", bookcart );

@@ -39,6 +39,7 @@
 			<td><input type="hidden" name="id" value="<%=aa.getId() %>">
 			<input type="hidden" name="name" value="<%=aa.getName() %>">
 			<input type="hidden" name="isbn" value="<%=aa.getIsbn() %>">
+			<input type="hidden" name="new_old" value="<%=aa.getNew_old() %>">
 			<input type="hidden" name="user_id" value="<%=user_account.getUser_id() %>">
 			<input type="submit" value="カート追加"></td>
 			</form>
