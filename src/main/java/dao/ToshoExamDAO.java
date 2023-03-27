@@ -7,7 +7,10 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import dto.ToshoExam;
@@ -38,7 +41,7 @@ public class ToshoExamDAO {
 				){
 			pstmt.setString(1, exam.getName());
 			pstmt.setString(2, exam.getPublisher());
-			pstmt.setInt(3, exam.getIsbn());
+			pstmt.setString(3, exam.getIsbn());
 			pstmt.setString(4, exam.getAuthor());
 			pstmt.setString(5, exam.getNew_old());
 			pstmt.setString(6, exam.getHouse());
@@ -75,7 +78,7 @@ public class ToshoExamDAO {
 					int id = rs.getInt("id");
 					String name = rs.getString("name");
 					String publisher = rs.getString("publisher");
-					int isbn = rs.getInt("isbn");
+					String isbn = rs.getString("isbn");
 					String author = rs.getString("author");
 					String new_old = rs.getString("new_old");
 					String house = rs.getString("house");
@@ -123,7 +126,7 @@ public static int deletelibrary(String isbn) {
 		return result;
 	}
 
-	public static int updatelibrary(int before_ISBN, int isbn, String book_name,String name,String company) {
+	public static int updatelibrary(String before_ISBN, String isbn, String book_name,String name,String company) {
 		String sql = "UPDATE library set isbn = ?,book_name = ?,name = ?,company = ? WHERE isbn = ?";
 		int result = 0;
 		
@@ -131,11 +134,11 @@ public static int deletelibrary(String isbn) {
 				Connection con = getConnection();
 				PreparedStatement pstmt = con.prepareStatement(sql);		// 構文解析
 				){
-			pstmt.setInt(1,isbn);
+			pstmt.setString(1,isbn);
 			pstmt.setString(2, book_name);
 			pstmt.setString(3, name);
 			pstmt.setString(4, company);
-			pstmt.setInt(5, before_ISBN);
+			pstmt.setString(5, before_ISBN);
 
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
@@ -166,7 +169,7 @@ public static int deletelibrary(String isbn) {
 					int id = rs.getInt("id");
 					String book_name = rs.getString("name");
 					String publisher = rs.getString("publisher");
-					int isbn = rs.getInt("isbn");
+					String isbn = rs.getString("isbn");
 					String author = rs.getString("author");
 					String new_old = rs.getString("new_old");
 					String house = rs.getString("house");
@@ -189,50 +192,50 @@ public static int deletelibrary(String isbn) {
 		return result;
    }
 		
-// ログインしているユーザの全状況を取得
-		public static List<ToshoExam> selectAlluser(){
-			
-			// 実行するSQL
-			String sql = "SELECT * FROM user_management";
-			
-			// 返却用のListインスタンス
-			List<ToshoExam> result = new ArrayList<>();
+
+		public static int RegisterBookCart(int user_id, int book_id, String new_old) {
+			String sql = "INSERT INTO book_lending VALUES(default, ?, ?, current_timestamp, ?, null)";
+			int result = 0;
 					
 			try (
 					Connection con = getConnection();
 					PreparedStatement pstmt = con.prepareStatement(sql);
 					){
-				
-				
-				
-				try (ResultSet rs = pstmt.executeQuery()){
-					
-					while(rs.next()) {
-						int id = rs.getInt("id");
-						String name = rs.getString("name");
-						String publisher = rs.getString("publisher");
-						int isbn = rs.getInt("isbn");
-						String author = rs.getString("author");
-						String new_old = rs.getString("new_old");
-						String house = rs.getString("house");
-						
-						//int account_id = rs.getInt("account_id");
-						
-					
 
-						ToshoExam user = new ToshoExam(id, name, publisher, isbn, author, new_old, house);
-						result.add(user);
-					}
-				}
+				Date date = new Date();
+				Calendar cal = Calendar.getInstance();
+				String old = "旧";
 				
+				if (new_old.equals(old)) {
+					cal.setTime(date);
+				    cal.add(Calendar.DATE, 14);
+				    SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy/MM/dd");
+				    String str1 = sdf1.format(cal.getTime());
+				    
+				    pstmt.setInt(1, user_id);
+					pstmt.setInt(2, book_id);
+					pstmt.setString(3, str1);
+					
+					result = pstmt.executeUpdate();
+				} else {
+					cal.setTime(date);
+				    cal.add(Calendar.DATE, 7);
+				    SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy/MM/dd");
+				    String str1 = sdf1.format(cal.getTime());
+				    
+				    pstmt.setInt(1, user_id);
+					pstmt.setInt(2, book_id);
+					pstmt.setString(3, str1);
+					
+					result = pstmt.executeUpdate();
+				}
 			} catch (SQLException e) {
 				e.printStackTrace();
-			}catch (URISyntaxException e) {
+			} catch (URISyntaxException e) {
 				e.printStackTrace();
+			} finally {
+				System.out.println(result + "件更新しました。");
 			}
-
-			// Listを返却する。0件の場合は空のListが返却される。
 			return result;
 		}
-
 }

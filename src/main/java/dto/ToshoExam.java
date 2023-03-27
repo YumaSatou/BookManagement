@@ -4,14 +4,14 @@ public class ToshoExam {
 	private int id;
 	private String name;
 	private String publisher;
-	private int isbn;
+	private String isbn;
 	private String author;
 	private String new_old;
 	private String house;
 	
 	
 	
-	public ToshoExam(int id, String name, String publisher, int isbn, String author, String new_old, String house) {
+	public ToshoExam(int id, String name, String publisher, String isbn, String author, String new_old, String house) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -59,14 +59,11 @@ public class ToshoExam {
 	}
 
 
-
-	public int getIsbn() {
+	public String getIsbn() {
 		return isbn;
 	}
 
-
-
-	public void setIsbn(int isbn) {
+	public void setIsbn(String isbn) {
 		this.isbn = isbn;
 	}
 
