@@ -14,6 +14,7 @@
 
 	<h2>検索結果</h2>
 	<table border="1">
+	
 		<tr>
 			<th>ID</th>
 			<th>図書名</th>
@@ -36,11 +37,17 @@
 			<td><%=ee.getIsbn() %></td>
 			<td ><%=ee.getAuthor()%></td>
 			<td><%=ee.getNew_old() %></td>
-			<td>削除</td>
+			<td>
+				<form action="RegisterConfirmServlet" method="post">
+					<input type="hidden" name="isbn" value="<%=ee.getIsbn() %>">
+					<input type="submit" value="削除">
+				</form>
+			</td>
 		</tr>
 		<%
 		}
 		%>
+		</form>
 		</table>
 		<h2><a href="TopServlet">戻る</a></h2>
 		

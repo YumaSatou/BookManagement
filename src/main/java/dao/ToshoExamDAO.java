@@ -99,10 +99,10 @@ public class ToshoExamDAO {
 		return result;
 	}
 
-public static int deletelibrary(String book_name) {
+public static int deletelibrary(String isbn) {
 		
 		
-		String sql = "DELETE FROM library WHERE book_name = ?";
+		String sql = "DELETE FROM book WHERE isbn = ?";
 		int result = 0;
 
 		try (
@@ -110,7 +110,7 @@ public static int deletelibrary(String book_name) {
 				PreparedStatement pstmt = con.prepareStatement(sql);		// 構文解析
 				){
 			
-			pstmt.setString(1, book_name);
+			pstmt.setString(1, isbn);
 
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
@@ -188,4 +188,51 @@ public static int deletelibrary(String book_name) {
 		// Listを返却する。0件の場合は空のListが返却される。
 		return result;
    }
+		
+// ログインしているユーザの全状況を取得
+		public static List<ToshoExam> selectAlluser(){
+			
+			// 実行するSQL
+			String sql = "SELECT * FROM user_management";
+			
+			// 返却用のListインスタンス
+			List<ToshoExam> result = new ArrayList<>();
+					
+			try (
+					Connection con = getConnection();
+					PreparedStatement pstmt = con.prepareStatement(sql);
+					){
+				
+				
+				
+				try (ResultSet rs = pstmt.executeQuery()){
+					
+					while(rs.next()) {
+						int id = rs.getInt("id");
+						String name = rs.getString("name");
+						String publisher = rs.getString("publisher");
+						int isbn = rs.getInt("isbn");
+						String author = rs.getString("author");
+						String new_old = rs.getString("new_old");
+						String house = rs.getString("house");
+						
+						//int account_id = rs.getInt("account_id");
+						
+					
+
+						ToshoExam user = new ToshoExam(id, name, publisher, isbn, author, new_old, house);
+						result.add(user);
+					}
+				}
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}catch (URISyntaxException e) {
+				e.printStackTrace();
+			}
+
+			// Listを返却する。0件の場合は空のListが返却される。
+			return result;
+		}
+
 }
