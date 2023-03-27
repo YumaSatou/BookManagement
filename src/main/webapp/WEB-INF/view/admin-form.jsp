@@ -20,7 +20,8 @@
 			名前：<input type="text" name="name" value="<%=ac.getName()%>"><br>
 			メール：<input type="email" name="email" value="<%=ac.getMail()%>"><br>
 			パスワード：<input type="password" name="pw"><br>
-			<input type="submit" value="登録">
+			<input type="submit" value="登録"><br>
+			<a href="TopServlet">戻る</a>
 		</form>
 	<%
 		} else {
@@ -30,7 +31,8 @@
 		名前：<input type="text" name="name"><br>
 		メール：<input type="email" name="email"><br>
 		パスワード：<input type="password" name="pw"><br>
-		<input type="submit" value="登録">
+		<input type="submit" value="登録"><br>
+		<a href="TopServlet">戻る</a>
 	</form>
 	<%
 		}
