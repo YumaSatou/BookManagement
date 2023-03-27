@@ -365,7 +365,7 @@ public class ToshoDAO {
 					+ "TO_CHAR(book_lending.borrow_date, 'YYYY/MM/DD HH24:MI') as borrow_date, \r\n"
 					+ "book_lending.due_date, book_lending.user_id, book_lending.book_id, book_lending.return_date\r\n"
 					+ "from ( book_lending inner join user_management on book_lending.user_id = user_management.user_id )\r\n"
-					+ "inner join book on book_lending.book_id = book.id where return_date is null and name like ?;";
+					+ "inner join book on book_lending.book_id = book.id where return_date is null and surname like ?;";
 			
 			try (
 					Connection con = getConnection();
