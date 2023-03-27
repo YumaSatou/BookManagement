@@ -102,10 +102,10 @@ public class ToshoExamDAO {
 		return result;
 	}
 
-public static int deletelibrary(String book_name) {
+public static int deletelibrary(String isbn) {
 		
 		
-		String sql = "DELETE FROM library WHERE book_name = ?";
+		String sql = "DELETE FROM book WHERE isbn = ?";
 		int result = 0;
 
 		try (
@@ -113,7 +113,7 @@ public static int deletelibrary(String book_name) {
 				PreparedStatement pstmt = con.prepareStatement(sql);		// 構文解析
 				){
 			
-			pstmt.setString(1, book_name);
+			pstmt.setString(1, isbn);
 
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
@@ -192,6 +192,7 @@ public static int deletelibrary(String book_name) {
 		return result;
    }
 		
+
 		public static int RegisterBookCart(int user_id, int book_id, String new_old) {
 			String sql = "INSERT INTO book_lending VALUES(default, ?, ?, current_timestamp, ?, null)";
 			int result = 0;
@@ -200,6 +201,7 @@ public static int deletelibrary(String book_name) {
 					Connection con = getConnection();
 					PreparedStatement pstmt = con.prepareStatement(sql);
 					){
+
 				Date date = new Date();
 				Calendar cal = Calendar.getInstance();
 				String old = "旧";
