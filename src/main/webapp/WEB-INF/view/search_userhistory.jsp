@@ -7,11 +7,10 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>検索結果</title>
-
+<title>利用者検索履歴一覧</title>
 </head>
 <body>
-<form action="UserHistoryServlet" method="post">
+	<form action="UserHistoryServlet" method="post">
 利用者検索　　<input type="text" name="surname"><br>
 <input type="submit" value="検索"><br>
 </form>
@@ -29,7 +28,7 @@
 		</tr>
 	
 		<%
-		List<BookLendingList> bookhistoryList = (List<BookLendingList>)request.getAttribute("bookhistoryList");
+		List<BookLendingList> bookhistoryList = (List<BookLendingList>)request.getAttribute("list");
 		for(BookLendingList hh : bookhistoryList){
 		%>
 		
