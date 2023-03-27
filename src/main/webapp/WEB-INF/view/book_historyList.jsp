@@ -29,7 +29,7 @@
 		</tr>
 	
 		<%
-		List<BookLendingList> bookhistoryList = (List<BookLendingList>)request.getAttribute("bookhistoryList");
+		List<BookLendingList> bookhistoryList = (List<BookLendingList>)request.getAttribute("list");
 		for(BookLendingList hh : bookhistoryList){
 		%>
 		
