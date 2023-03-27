@@ -26,6 +26,7 @@
 		
 			<input type="submit" value="登録">
 		
+		<h2><a href="TopServlet" style="color:black">戻る</a></h2>
 		</form>
 	<%	
 		} else {
