@@ -354,4 +354,96 @@ public class ToshoDAO {
 		// Listを返却する。0件の場合は空のListが返却される。
 		return result;
    }
+		
+		public static List<BookLendingList> selectAllUser(String surname) {
+			
+			// 返却用変数
+			List<BookLendingList> result = new ArrayList<>();
+
+			String sql = "select book.name as book_name, book.isbn,\r\n"
+					+ "user_management.surname, user_management.name, user_management.mail,\r\n"
+					+ "TO_CHAR(book_lending.borrow_date, 'YYYY/MM/DD HH24:MI') as borrow_date, \r\n"
+					+ "book_lending.due_date, book_lending.user_id, book_lending.book_id, book_lending.return_date\r\n"
+					+ "from ( book_lending inner join user_management on book_lending.user_id = user_management.user_id )\r\n"
+					+ "inner join book on book_lending.book_id = book.id where return_date is null and name like ?;";
+			
+			try (
+					Connection con = getConnection();
+					PreparedStatement pstmt = con.prepareStatement(sql);
+					){
+				pstmt.setString(1, "%"+surname+"%");
+				try (ResultSet rs = pstmt.executeQuery()){
+					
+					while(rs.next()) {
+						String book_name = rs.getString("book_name");
+						String isbn = rs.getString("isbn");
+						String suruser = rs.getString("surname");
+						String name = rs.getString("name");
+						String mail = rs.getString("mail");
+						String borrow_date = rs.getString("borrow_date");
+						String due_date = rs.getString("due_date");
+						int user_id = rs.getInt("user_id");
+						int book_id = rs.getInt("book_id");
+						String return_date = rs.getString("return_date");
+						
+						BookLendingList Ac = new BookLendingList(book_name, isbn, suruser, name, mail, borrow_date, due_date, user_id, book_id, return_date);
+						
+						result.add(Ac);
+					}
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} catch (URISyntaxException e) {
+				e.printStackTrace();
+			}
+
+			// Listを返却する。0件の場合は空のListが返却される。
+			return result;
+	   }
+		
+		public static List<BookLendingList> SelectAllBookHistory(String surname) {
+			// 返却用変数
+			List<BookLendingList> result = new ArrayList<>();
+
+			String sql = "select book.name as book_name, book.isbn,\r\n"
+					+ "user_management.surname, user_management.name, user_management.mail,\r\n"
+					+ "TO_CHAR(book_lending.borrow_date, 'YYYY/MM/DD HH24:MI') as borrow_date, \r\n"
+					+ "TO_CHAR(book_lending.return_date, 'YYYY/MM/DD HH24:MI') as return_date, \r\n"
+					+ "book_lending.due_date, book_lending.user_id, book_lending.book_id \r\n"
+					+ "from ( book_lending inner join user_management on book_lending.user_id = user_management.user_id )\r\n"
+					+ "inner join book on book_lending.book_id = book.id where return_date is not null and name like ?;";
+			
+			try (
+					Connection con = getConnection();
+					PreparedStatement pstmt = con.prepareStatement(sql);
+					){
+				pstmt.setString(1, "%"+surname+"%");
+				try (ResultSet rs = pstmt.executeQuery()){
+					
+					while(rs.next()) {
+						String book_name = rs.getString("book_name");
+						String isbn = rs.getString("isbn");
+						String suruser = rs.getString("surname");
+						String name = rs.getString("name");
+						String mail = rs.getString("mail");
+						String borrow_date = rs.getString("borrow_date");
+						String due_date = rs.getString("due_date");
+						int user_id = rs.getInt("user_id");
+						int book_id = rs.getInt("book_id");
+						String return_date = rs.getString("return_date");
+						
+						BookLendingList Ac = new BookLendingList(book_name, isbn, suruser, name, mail, borrow_date, due_date, user_id, book_id, return_date);
+						
+						result.add(Ac);
+					}
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} catch (URISyntaxException e) {
+				e.printStackTrace();
+			}
+
+			// Listを返却する。0件の場合は空のListが返却される。
+			return result;
+	   }
 }

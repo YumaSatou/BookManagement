@@ -7,8 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>検索結果</title>
-
+<title>利用者貸出一覧</title>
 </head>
 <body>
 														
@@ -29,7 +28,7 @@
 		</tr>
 	
 		<%
-		List<BookLendingList> lendiglist = (List<BookLendingList>)request.getAttribute("lendiglist");
+		List<BookLendingList> lendiglist = (List<BookLendingList>)request.getAttribute("list");
 		for(BookLendingList ll : lendiglist){
 		%>
 		
