@@ -34,7 +34,7 @@ public class UpdateLibraryServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
 		
-		List<ToshoExam> UpdateBookList = ToshoDAO.selectAlllibrary();
+		List<ToshoExam> UpdateBookList = ToshoDAO.selectNewBooklibrary();
 		
 		// 取得したリストをリクエストスコープに保管(JSPに渡すため)
 		request.setAttribute("UpdateBookList", UpdateBookList);

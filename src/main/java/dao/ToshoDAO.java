@@ -119,12 +119,12 @@ public class ToshoDAO {
 		}
 		return null;
 	}
-	public static List<ToshoExam> selectAlllibrary() {
+	public static List<ToshoExam> selectNewBooklibrary() {
 		
 		// 返却用変数
 		List<ToshoExam> result = new ArrayList<>();
 
-		String sql = "SELECT * FROM book";
+		String sql = "SELECT * FROM book where new_old = '新' ";
 		
 		try (
 				Connection con = getConnection();

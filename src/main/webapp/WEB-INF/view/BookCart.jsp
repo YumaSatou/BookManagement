@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="dto.* ,java.util.*"%>
-<%@ page import="java.util.List" %>
-<%@ page import="java.util.ArrayList" %>
-<%@ page import="dto.UserList" %>
 <%
+request.setCharacterEncoding("UTF-8");
 BookCart bookcart = (BookCart)session.getAttribute("bookcart");
+UserList user_account = (UserList)session.getAttribute("user_account");
+String name = user_account.getName();
 %>
 <!DOCTYPE html>
 <html>
@@ -13,10 +13,6 @@ BookCart bookcart = (BookCart)session.getAttribute("bookcart");
 <title>貸出候補画面</title>
 </head>
 <body>
-	<%
-	UserList user_account = (UserList)session.getAttribute("user_account");
-	%>
-
 	<h2>モリジョビ図書館</h2>
 	
 	<h2>管理者管理</h2>
@@ -31,7 +27,7 @@ BookCart bookcart = (BookCart)session.getAttribute("bookcart");
 	<a href="">口コミ一覧</a><br>
 	
 	
-	<p><%=user_account.getName() %>さんのカート</p>
+	<p><%=user_account.getSurname() %><%=user_account.getName() %>さんのカート</p>
 	<form action="CartBookSearchServlet" method="post">
 	図書検索　　図書名<input type="text" name="name"><br>
 	<input type="submit" value="検索"><br>

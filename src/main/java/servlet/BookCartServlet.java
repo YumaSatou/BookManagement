@@ -31,7 +31,7 @@ public class BookCartServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getParameter("UTF-8");
+		request.setCharacterEncoding("UTF-8");
 		
 		String user_id = request.getParameter("user_id");
 		int user_id2 = Integer.parseInt(user_id);
