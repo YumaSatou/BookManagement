@@ -21,8 +21,8 @@
 	<a href="RegisterLibraryServlet">図書登録</a><br>
 	<a href="SearchServlet">図書検索</a><br>
 	<a href="UpdateLibraryServlet">新→旧更新</a><br>
-	<a href="">貸出中図書一覧</a><br>
-	<a href="">図書貸出履歴</a><br>
+	<a href="BookLendinListServlet">貸出中図書一覧</a><br>
+	<a href="BookHistoryServlet">図書貸出履歴</a><br>
 	<a href="">口コミ一覧</a><br>
 	
 	<form action="SearchUserServlet" method="post">
