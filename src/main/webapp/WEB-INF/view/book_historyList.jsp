@@ -15,10 +15,6 @@
 <body>
 
 	<h2>モリジョビ図書館</h2>
-	<form action="UserHistoryServlet" method="post">
-	利用者検索　　<input type="text" name="surname"><br>
-	<input type="submit" value="検索"><br>
-	</form>
 
 	<nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class ="container-fluid">
@@ -56,9 +52,13 @@
     </div>
   </div>
 </nav>
-<br><br>
+<br>
 
-	<h3>図書貸出履歴</h3><br>
+	<h3>図書貸出履歴</h3>									<form action="UserHistoryServlet" method="post">
+															利用者検索　　<input type="text" name="surname">
+															<input type="submit" value="検索"><br><br>
+															</form>
+	
 	<table class="table table-dark table-hover">
 		<thead>
     		<tr>

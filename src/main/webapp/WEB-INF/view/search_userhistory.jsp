@@ -55,12 +55,12 @@
   </div>
 </nav>
 <br><br>
-
+<h3>図書貸出履歴</h3>
 	<form action="UserHistoryServlet" method="post">
 利用者検索　　<input type="text" name="surname">
 <input type="submit" value="検索"><br>
 </form>
-	<h3>図書貸出履歴</h3>
+	
 	<table class="table table-dark table-hover">
 		<thead>
     		<tr>
