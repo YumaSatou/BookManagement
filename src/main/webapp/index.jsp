@@ -19,12 +19,12 @@
 		request.setCharacterEncoding("UTF-8");
 		if(request.getParameter("error") != null){	
 	%>
-		<h2 style="color:red">ログイン失敗</h2>
+		<h3 style="color:red">ログイン失敗</h3>
 	<form action="LoginServlet" method="post">
 	
-		ログインID：<input type="text" name="mail" value="<%=request.getParameter("mail") %>"><br>
-		PW：<input type="password" name="pw"><br>
-		<input type="submit" value="ログイン"><br>
+		ログインID：<input type="text" name="mail" value="<%=request.getParameter("mail") %>"><br><br>
+		PW：<input type="password" name="pw"><br><br>
+		<input type="submit" value="ログイン"><br><br>
 	<a href="RegisterFormServlet">新規登録はこちら</a>
 	</form>
 	<%
