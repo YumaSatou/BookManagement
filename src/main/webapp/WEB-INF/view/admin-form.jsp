@@ -62,10 +62,10 @@
 		<p style="color:red">登録に失敗しました。</p>
 		<h3>新規管理者登録</h3>
 		<form action="RegisterExecuteServlet" method="post">
-			名前：<input type="text" name="name" value="<%=ac.getName()%>"><br>
-			メール：<input type="email" name="email" value="<%=ac.getMail()%>"><br>
-			パスワード：<input type="password" name="pw"><br>
-			<input type="submit" value="登録"><br>
+			名前：<input type="text" name="name" value="<%=ac.getName()%>"><br><br>
+			メール：<input type="email" name="email" value="<%=ac.getMail()%>"><br><br>
+			パスワード：<input type="password" name="pw"><br><br>
+			<input type="submit" value="登録"><br><br>
 			<a href="TopServlet">戻る</a>
 		</form>
 	<%
@@ -76,7 +76,7 @@
 		名前：<input type="text" name="name"><br><br>
 		メール：<input type="email" name="email"><br><br>
 		パスワード：<input type="password" name="pw"><br><br>
-		<input type="submit" value="登録">
+		<input type="submit" value="登録"><br><br>
     <a href="TopServlet">戻る</a>
 	</form>
 	<%
