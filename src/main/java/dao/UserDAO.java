@@ -12,6 +12,7 @@ import java.util.List;
 
 import dto.User;
 import dto.UserList;
+import dto.UserMouth;
 import util.GenerateHashedPw;
 import util.GenerateSalt;
 
@@ -193,6 +194,46 @@ public class UserDAO {
 		} finally {
 			System.out.println(result + "件更新しました。");
 		}
+		return result;
+	}
+	
+	public static List<UserMouth> SelectAllMouth() {
+		
+		// 返却用変数
+		List<UserMouth> result = new ArrayList<>();
+
+		String sql = "select book_mouth.mouth_id, book.name as book_name, user_management.surname,\r\n"
+				+ "book_mouth.word_mouth, book_mouth.assessment,\r\n"
+				+ "TO_CHAR(book_mouth.created_at, 'YYYY/MM/DD HH24:MI') as created_at\r\n"
+				+ "from ( book_mouth inner join book on book_mouth.book_id = book.id )\r\n"
+				+ "inner join user_management on book_mouth.user_id = user_management.user_id order by created_at desc";
+		
+		try (
+				Connection con = getConnection();
+				PreparedStatement pstmt = con.prepareStatement(sql);
+				){
+			try (ResultSet rs = pstmt.executeQuery()){
+				while(rs.next()) {
+					
+					int mouth_id = rs.getInt("mouth_id");
+					String book_name = rs.getString("book_name");
+					String surname = rs.getString("surname");
+					String word_mouth = rs.getString("word_mouth");
+					int assessment = rs.getInt("assessment");
+					String created_at = rs.getString("created_at");
+					
+					UserMouth Ac = new UserMouth(mouth_id, book_name, surname, word_mouth, assessment, created_at);
+					
+					result.add(Ac);
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (URISyntaxException e) {
+			e.printStackTrace();
+		}
+
+		// Listを返却する。0件の場合は空のListが返却される。
 		return result;
 	}
 }

@@ -67,6 +67,8 @@
       			<th scope="col">メール</th>
       			<th scope="col">借用日</th>
       			<th scope="col">返却予定日</th>
+            <th></th>
+			      <th></th>	
     		</tr>
   		</thead>
 	
@@ -76,7 +78,6 @@
 		%>
 		
 		<tr>
-			<form action="BookReturnServlet" method="post">
 			<td ><%=ll.getBook_name() %></td>
 			<td ><%=ll.getIsbn() %></td>
 			<td ><%=ll.getSurname() %></td>
@@ -84,8 +85,21 @@
 			<td ><%=ll.getMail() %></td>
 			<td ><%=ll.getBorrow_date() %></td>
 			<td ><%=ll.getDue_date() %></td>
-			<td><input type="hidden" name="book_id" value="<%=ll.getBook_id() %>"><input type="hidden" name="user_id" value="<%=ll.getUser_id() %>"><input type="submit" value="返却"></td>
-			</form>
+			<td>
+				<form action="BookReturnServlet" method="post">
+					<input type="hidden" name="book_id" value="<%=ll.getBook_id() %>">
+					<input type="hidden" name="user_id" value="<%=ll.getUser_id() %>">
+					<input type="submit" value="返却">
+				</form>
+			</td>
+			<td>
+				<form action="MailServlet" method="post">
+					<input type="hidden" name="mail" value="<%=ll.getMail() %>">
+					<input type="hidden" name="due_date" value="<%=ll.getDue_date() %>">
+					<input type="submit" value="催促メール送信">
+				</form>
+			</td>
+			
 		</tr>
 		<%
 		}

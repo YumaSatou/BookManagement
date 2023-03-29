@@ -238,4 +238,28 @@ public static int deletelibrary(String isbn) {
 			}
 			return result;
 		}
+		
+		public static int deletemouth(int mouth_id) {
+			
+			
+			String sql = "DELETE FROM book_mouth WHERE mouth_id = ?";
+			int result = 0;
+
+			try (
+					Connection con = getConnection();
+					PreparedStatement pstmt = con.prepareStatement(sql);		// 構文解析
+					){
+				
+				pstmt.setInt(1, mouth_id);
+
+				result = pstmt.executeUpdate();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} catch (URISyntaxException e) {
+				e.printStackTrace();
+			} finally {
+				System.out.println(result + "件削除しました。");
+			}
+			return result;
+		}
 }

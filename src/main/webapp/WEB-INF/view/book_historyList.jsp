@@ -70,8 +70,8 @@
   		</thead>
 	
 		<%
-		List<BookLendingList> bookhistoryList = (List<BookLendingList>)request.getAttribute("bookhistoryList");
-		for(BookLendingList hh : bookhistoryList){
+		List<BookLendingList> historyList = (List<BookLendingList>)request.getAttribute("bookhistoryList");
+		for(BookLendingList hh : historyList){
 		%>
 		
 		<tr>
