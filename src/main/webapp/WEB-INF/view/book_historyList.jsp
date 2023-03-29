@@ -50,7 +50,7 @@
           <a class="nav-link active" aria-current="page" href="BookLendinListServlet">貸出中図書一覧</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">口コミ一覧</a>
+          <a class="nav-link active" aria-current="page" href="BookMouthListServlet">口コミ一覧</a>
         </li>
       </ul>
     </div>
