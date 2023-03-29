@@ -17,8 +17,9 @@
 	<h2>モリジョビ図書館</h2>
 	<form action="UserHistoryServlet" method="post">
 	利用者検索　　<input type="text" name="surname"><br>
+	<input type="submit" value="検索"><br>
 	</form>
-<input type="submit" value="検索"><br>
+
 	<nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class ="container-fluid">
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
